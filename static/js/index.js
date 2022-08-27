@@ -1,5 +1,5 @@
 /*************************************************************/
-/*                         XH Tool Set                       */
+/*                   xiaohong2022.github.io                  */
 /*                   created by Xiaohong2022                 */
 /*                (c) 2022 All rights reserved.              */
 /*************************************************************/
@@ -32,7 +32,4 @@
     setCookie:((name, value)=>{document.cookie=`${name}=${value}`; return value}),
   };
   Object.assign(window, a);//把上面的东西全部搞到全局变量里
-  console.log("%c"+`小宏工具集`,"color:#6cf;font-size:50px;text-shadow:0px 4px 10px #aaa;");
-  console.log("嘿，欢迎使用小宏工具集。");
-  console.log("本站有一些常用的小工具，快去使用吧（更多小工具正在开发中，敬请期待~）");
 })();
