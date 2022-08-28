@@ -44,13 +44,13 @@
       <a href="#tab2-content" id="tab2" class="mdui-ripple">代码分享</a>
       <a href="#tab3-content" id="tab3" class="mdui-ripple">近期新作</a>
     </div>
-    <div id="tab1-content" class="mdui-card">
+    <div id="tab1-content">
       loading...
     </div>
-    <div id="tab2-content" class="mdui-card">
+    <div id="tab2-content" >
       loading...
     </div>
-    <div id="tab3-content" class="mdui-card">
+    <div id="tab3-content">
       loading...
     </div>
   </div>
@@ -82,7 +82,7 @@
 <script>
     const hdata = {
       "tab1":{
-        "html":(data)=>{return `<div class="mdui-card-media">
+        "html":(data)=>{return `<div class="mdui-card"><div class="mdui-card-media">
         <img src="${data.img}"/>
         <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
           <div class="mdui-card-primary">
@@ -93,7 +93,7 @@
       </div>
       <div class="mdui-card-actions">
         <button class="mdui-btn mdui-ripple" onclick="window.open('${data.url}')">查看作品</button>
-      </div>
+      </div></div>
       `},
         "data":[
           {name:"水上跑酷（已停更）",url:"https://box3.codemao.cn/g/225566",jianjie:`一个水上跑酷地图（已停更）`,img:"https://static.box3.codemao.cn/block/QmS5mzZK8VwukouSnx4wgkKeKZ3YMVpEnVD3rDF9V8HbBS..png"},
