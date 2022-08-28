@@ -1,1 +1,120 @@
-制作中...
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>小宏XeLa的个人主页</title>
+  <link rel="stylesheet" href="./static/mdui/mdui.min.css">
+  <link rel="shortcut icon" href="https://static.codemao.cn/whitef/favicon.ico">
+  <script src="./static/mdui/mdui.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+  <div class="mdui-appbar">
+    <div class="mdui-toolbar mdui-color-grey-100">
+      <a href="javascript:void(0)" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#drawer'}"><i class="mdui-icon material-icons">menu</i></a>
+      <a href="javascript:void(0)" class="mdui-typo-title">小宏XeLa - 个人主页</a>
+      <div class="mdui-toolbar-spacer"></div>
+      <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '搜索', position: 'bottom'}">
+        <i class="mdui-icon material-icons">search</i>
+      </a>
+      <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '重新加载', position: 'bottom'}">
+        <i class="mdui-icon material-icons">refresh</i>
+      </a>
+      <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '登录', position: 'bottom'}">
+        <i class="mdui-icon material-icons" mdui-dialog="{target: '#login'}">person</i>
+      </a>
+      <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '更多', position: 'bottom'}" mdui-menu="{target: '#main-menu'}">
+        <i class="mdui-icon material-icons">more_vert</i>
+      </a>
+      <ul class="mdui-menu" id="main-menu" style="transform-origin: 100% 0px; position: fixed;">
+        
+      </ul>
+    </div>
+  </div>
+  <img class="mdui-img-fluid" src="https://code-vicent.vercel.app/img/vicent.jpg"/>
+  <div class="mdui-divider-inset"></div>
+  <!--div class="mdui-chip">
+    <img class="mdui-chip-icon" src="https://static.box3.codemao.cn/img/QmWnZwK48wxQzP9bSCggCY3DGcMSsnrLAxSuEjd1KRbF6T_60_60_cover.avif"/>
+    <span class="mdui-chip-title">状态：编程中···</span>
+  </div-->
+  <div class="mdui-container">
+    <div class="mdui-tab mdui-color-grey-100 mdui-tab-full-width" id="tab">
+      <a href="#tab1-content" id="tab1" class="mdui-ripple">我的作品</a>
+      <a href="#tab2-content" id="tab2" class="mdui-ripple">代码分享</a>
+      <a href="#tab3-content" id="tab3" class="mdui-ripple">近期新作</a>
+    </div>
+    <div id="tab1-content" class="mdui-card">
+      loading...
+    </div>
+    <div id="tab2-content" class="mdui-card">
+      loading...
+    </div>
+    <div id="tab3-content" class="mdui-card">
+      loading...
+    </div>
+  </div>
+  <div id="login" class="mc-user-edit mdui-dialog mdui-dialog-open">
+    <div class="mdui-dialog-title mdui-color-indigo mdui-p-y-2">
+      <button class="mdui-btn mdui-btn-icon" mdui-dialog-close=""><i class="mdui-icon material-icons">close</i></button> 登录
+    </div>
+    <div class="mdui-dialog-content mdui-p-a-2">
+      <div class="mdui-textfield mdui-textfield-floating-label">
+        <label class="mdui-textfield-label">用户名</label>
+        <input class="mdui-textfield-input" type="text" id="username">
+      </div>
+      <div class="mdui-textfield mdui-textfield-floating-label">
+        <label class="mdui-textfield-label">密码</label>
+        <input class="mdui-textfield-input" type="password" id="password">
+      </div>
+      <br>
+      <button class="mdui-btn mdui-color-theme-accent mdui-btn-raised mdui-ripple mdui-float-right" id="login">登录</button>
+    </div>
+  </div>
+</body>
+<script>
+    var $2 = mdui.$;
+    var tab = new mdui.Tab('#tab');
+    tab.show(0);
+    var inst = new mdui.Drawer('#drawer');
+    inst.close();
+</script>
+<script>
+    const hdata = {
+      "tab1":{
+        "html":(data)=>{return `<div class="mdui-card-media">
+        <img src="${data.img}"/>
+        <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
+          <div class="mdui-card-primary">
+            <div class="mdui-card-primary-title">${data.name}</div>
+            <div class="mdui-card-primary-subtitle">${data.jianjie}</div>
+          </div>
+        </div>
+      </div>
+      <div class="mdui-card-actions">
+        <button class="mdui-btn mdui-ripple" onclick="window.open('${data.url}')">查看作品</button>
+      </div>
+      `},
+        "data":[
+          {name:"水上跑酷（已停更）",url:"https://box3.codemao.cn/g/225566",jianjie:`一个水上跑酷地图（已停更）`,img:"https://static.box3.codemao.cn/block/QmS5mzZK8VwukouSnx4wgkKeKZ3YMVpEnVD3rDF9V8HbBS..png"},
+          {name:"创作世界（Build World）",url:"https://box3.codemao.cn/g/397936",jianjie:`这个地图完全空白，尽情发挥想象力，创造全新的世界。`,img:"https://static.box3.codemao.cn/block/QmfGuXR9mxJvPJa45p4DSt5X56Y2z1vgJQrN9bXMMG7jGp..png"},
+          {name:"编程猫Nemo聊天室",url:"https://shequ.codemao.cn/work/95617409",jianjie:`一个小小的聊天室`,img:"https://creation.codemao.cn/490/YW5kXzIwMDFfOTIzMjE1MV85NTYxNzQwOV8xNjE5OTYwMjU5MTM1X0NreXNLd1NO.jpg"},
+          {name:"RGB颜色和十六进制颜色",url:"https://shequ.codemao.cn/work/126191840",jianjie:`一款可以把RGB颜色和十六进制颜色转换的工具`,img:"https://creation.codemao.cn/445/kitten/d2ViXzIwMDFfOTIzMjE1MV8xMjYxOTE4NDBfMTY1OTA1NTAxODkyMV82ZDFkZDVlOQ==.png"},
+          {name:"旋转矩阵转四元素",url:"https://shequ.codemao.cn/work/155805102",jianjie:`这是一个可以吧旋转矩阵转换成四元素的小工具`,img:"https://creation.codemao.cn/445/kitten/d2ViXzIwMDFfOTIzMjE1MV8xNTU4MDUxMDJfMTY1OTA1NDk4ODExNV85ZGY0M2M3Yw==.png"},
+        ],
+      },
+      "tab2":{"html":()=>{},"data":[]}
+    }
+    ;(async ()=>{
+      for(var a in hdata){
+        var b = $2("#"+a+"-content")[0];
+        var c = "";
+        var d = hdata[a]
+        for(var d of d["data"]){
+          c+=d["html"](d)
+        }
+        b.innerHTML=c;
+      }
+    })();
+</script>
+</html>
