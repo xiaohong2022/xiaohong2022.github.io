@@ -24,6 +24,9 @@
       <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '登录', position: 'bottom'}">
         <i class="mdui-icon material-icons" mdui-dialog="{target: '#login'}">person</i>
       </a>
+      <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '切换日间/夜间模式', position: 'bottom'}" id="change_theme">
+        <i class="mdui-icon material-icons" id="change_theme_icon">brightness_4</i>
+      </a>
       <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '更多', position: 'bottom'}" mdui-menu="{target: '#main-menu'}">
         <i class="mdui-icon material-icons">more_vert</i>
       </a>
@@ -121,5 +124,15 @@
         b.innerHTML=c;
       }
     })();
+    $2('#change_theme').on('click', function () {
+        //change_theme_icon
+        if($2('body')[0].className.split(" ").includes("mdui-theme-layout-dark")){
+          $2('body')[0].classList.remove("mdui-theme-layout-dark")
+          $2("#change_theme_icon")[0].innerHTML="brightness_7"
+        }else{
+          $2('body')[0].classList.remove("mdui-theme-layout-dark")
+          $2("#change_theme_icon")[0].innerHTML="brightness_4"
+        }
+    });
 </script>
 </html>
