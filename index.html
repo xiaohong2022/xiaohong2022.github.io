@@ -75,6 +75,17 @@
     </div>
   </div>
 </body>
+<style>
+  .mdui-card {
+    margin: 20px 50px;
+    width: calc(100% - 100px);
+  }
+  div#tab1-content {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+</style>
 <script>
     var $2 = mdui.$;
     var tab = new mdui.Tab('#tab');
@@ -127,10 +138,10 @@
     $2('#change_theme')[0].onclick=function () {
         if($2('body')[0].className.split(" ").includes("mdui-theme-layout-dark")){
           $2('body')[0].classList.remove("mdui-theme-layout-dark")
-          $2("#change_theme_icon")[0].innerHTML="brightness_7"
-        }else{
-          $2('body')[0].classList.remove("mdui-theme-layout-dark")
           $2("#change_theme_icon")[0].innerHTML="brightness_4"
+        }else{
+          $2('body')[0].classList.add("mdui-theme-layout-dark")
+          $2("#change_theme_icon")[0].innerHTML="brightness_7"
         }
     };
 </script>
