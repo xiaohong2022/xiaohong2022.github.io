@@ -28,11 +28,11 @@
         <i class="mdui-icon material-icons">more_vert</i>
       </a>
       <ul class="mdui-menu" id="main-menu" style="transform-origin: 100% 0px; position: fixed;">
-        
+        这里啥也不是
       </ul>
     </div>
   </div>
-  <img class="mdui-img-fluid" src="https://code-vicent.vercel.app/img/vicent.jpg"/>
+  <img class="mdui-img-fluid" src="https://cdn-community.codemao.cn/community_frontend/asset/banner_65b4a.png"></img>
   <div class="mdui-divider-inset"></div>
   <!--div class="mdui-chip">
     <img class="mdui-chip-icon" src="https://static.box3.codemao.cn/img/QmWnZwK48wxQzP9bSCggCY3DGcMSsnrLAxSuEjd1KRbF6T_60_60_cover.avif"/>
@@ -103,15 +103,20 @@
           {name:"旋转矩阵转四元素",url:"https://shequ.codemao.cn/work/155805102",jianjie:`这是一个可以吧旋转矩阵转换成四元素的小工具`,img:"https://creation.codemao.cn/445/kitten/d2ViXzIwMDFfOTIzMjE1MV8xNTU4MDUxMDJfMTY1OTA1NDk4ODExNV85ZGY0M2M3Yw==.png"},
         ],
       },
-      "tab2":{"html":()=>{},"data":[]}
+      "tab2":{"html":()=>{},"data":[]},
+      "tab3":{"html":()=>{},"data":[]},
     }
     ;(async ()=>{
       for(var a in hdata){
         var b = $2("#"+a+"-content")[0];
         var c = "";
         var d = hdata[a]
-        for(var d of d["data"]){
-          c+=d["html"](d)
+        if(!d["data"].length){
+          c="这里啥也没有a"
+        }else{
+          for(var e of d["data"]){
+            c+=d["html"](e)
+          }
         }
         b.innerHTML=c;
       }
