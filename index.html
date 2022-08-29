@@ -87,7 +87,7 @@
   <div class="mdui-drawer mdui-drawer-close" id="drawer">
     <ul class="mdui-list">
       <a class="mdui-list-item mdui-ripple" href="/">
-          <i class="mdui-list-item-icon mdui-icon material-icons">home</i>
+          <i class="mdui-list-item-icon mdui-icon material-icons" id="zuocelanhomebtn">home</i>
           <div class="mdui-list-item-content">首页</div>
       </a>
       <div class="mdui-collapse-item mdui-collapse-item-open">
@@ -186,6 +186,7 @@
         $2("#main-tab-my")[0].style.display="none"
       }
     } catch (e) {
+        $2("#zuocelanhomebtn")[0].classList.add("mdui-list-item-active")
     }
 </script>
 <script>
