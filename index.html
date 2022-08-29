@@ -67,7 +67,7 @@
   <div class="mdui-container" id="tool-tag-1" style="display: none">
       <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-not-empty">
           <label class="mdui-textfield-label">请输入作品ID（必须是发布后的作品）</label>
-          <input class="mdui-textfield-input" type="text" id="k4tococoworkurl" value="https://shequ.codemao.cn/work/95617409">
+          <input class="mdui-textfield-input" type="text" id="k4tococoworkurl" value="95617409">
       </div>
      <button class="mdui-btn mdui-ripple" onclick="k4tococofunc(this)">一键转换</button>
     <script>
@@ -87,8 +87,8 @@
        save_link.download = name;
        saveData(save_link);
       }
-      async function k4tococofunc(btn){
-        var inputnum = $("#k4tococoworkurl").value
+      window.k4tococofunc = async function (btn){
+        var inputnum = document.querySelector("#k4tococoworkurl").value
         if(isNaN(Number(inputnum))){mdui.alert("ID是一个数字，不是字串符哦~","提示");return}
         if(String(inputnum).length<7){mdui.alert("作品太老了，不能转换！","提示")}
         btn.innerHTML="转换中..."
@@ -99,7 +99,7 @@
           if(xhr.status==200 && xhr.readyState==4){
             var xhr2 = new XMLHttpRequest();
             xhr2.open("GET", "https://api.codemao.cn/creation-tools/v1/works/"+inputnum, true);
-            xhr2.onreadystatechange=()=>{
+            xhr2.onreadystatechange=async()=>{
               if(xhr2.status==200 && xhr2.readyState==4){
                 var data = xhr.response
                 var data2 = JSON.parse(xhr2.response)
@@ -114,7 +114,7 @@
                   await sleep(1000)
                   btn.disabled=false
                   btn.innerHTML="一键转换"
-                  mdui.confirm("转换完成！","提示",console.log,console.log,{cancelText:"关闭",confirmText:"下载json",closeOnConfirm:false})
+                  mdui.confirm("转换完成！","提示",()=>{saveFile(`${workname}.json`,downtext)},()=>{},{cancelText:"关闭",confirmText:"下载json",closeOnConfirm:false})
                 }
               }
             };
