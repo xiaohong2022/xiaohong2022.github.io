@@ -65,7 +65,11 @@
     </div>
   </div>
   <div class="mdui-container" id="tool-tag-1" style="display: none">
-     <button class="mdui-btn mdui-ripple" onclick="window.open('https://www.bilibili.com/video/BV1GJ411x7h7')">K4转CoCo</button>
+      <div class="mdui-textfield mdui-textfield-floating-label">
+          <label class="mdui-textfield-label">请输入作品链接</label>
+          <input class="mdui-textfield-input" type="text" id="k4tococoworkurl">
+      </div>
+     <button class="mdui-btn mdui-ripple" onclick="window.open('https://www.bilibili.com/video/BV1GJ411x7h7')">转换并下载json</button>
   </div>
   <div id="login" class="mc-user-edit mdui-dialog mdui-dialog-open" style="width: 500px;">
     <div class="mdui-dialog-title mdui-color-indigo mdui-p-y-2">
@@ -185,6 +189,7 @@
         $2("#tool-tag-"+getParameters("tooltag"))[0].style.display="block"
         $2("#tooltagbtn"+getParameters("tooltag"))[0].classList.add("mdui-list-item-active")
         $2("#main-tab-my")[0].style.display="none"
+        $2("#mduititle")[0].innerHTML=$2("#tooltagbtn"+getParameters("tooltag"))[0].innerText
       }
     } catch (e) {
         $2("#zuocelanhomebtn")[0].classList.add("mdui-list-item-active")
