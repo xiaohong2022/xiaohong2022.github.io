@@ -97,7 +97,7 @@
             <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
           </div>
           <div class="mdui-collapse-item-body mdui-list" style="height: auto;">
-            <a href="?tooltag=1" class="mdui-list-item mdui-ripple">K4转CoCo</a>
+            <a href="?tooltag=1" class="mdui-list-item mdui-ripple" id="tooltagbtn1">K4转CoCo</a>
           </div>
         </div>
       <a class="mdui-list-item mdui-ripple" href="javascript:void(0)">
@@ -182,10 +182,10 @@
     try {
       if(getParameters("tooltag")){
         $2("#tool-tag-"+getParameters("tooltag"))[0].style.display="block"
+        $2("#tooltagbtn"+getParameters("tooltag"))[0].classList.add("mdui-list-item-active")
+        $2("#main-tab-my")[0].style.display="none"
       }
     } catch (e) {
-    } finally {
-      $2("#main-tab-my")[0].style.display="none"
     }
 </script>
 <script>
