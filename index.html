@@ -17,7 +17,6 @@
     <div class="mdui-toolbar mdui-color-grey-100">
       <a href="javascript:void(0)" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#drawer'}"><i class="mdui-icon material-icons">menu</i></a>
       <a href="javascript:void(0)" class="mdui-typo-title">小宏XeLa</a>
-      <div class="title" id="mduititle">个人主页</div>
       <div class="mdui-toolbar-spacer"></div>
       <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '搜索', position: 'bottom'}">
         <i class="mdui-icon material-icons">search</i>
@@ -43,7 +42,7 @@
       </ul>
     </div>
   </div>
-  <img class="mdui-img-fluid" src="https://cdn-community.codemao.cn/community_frontend/asset/banner_65b4a.png"></img>
+  <div style="background-image: url(https://cdn-community.codemao.cn/community_frontend/asset/banner_65b4a.png);" class="toppng" id="mduititle">欢迎来到小宏XeLa的个人主页~</div>
   <div class="mdui-divider-inset"></div>
   <div class="mdui-container" id="main-tab-my">
     <div class="mdui-tab mdui-color-grey-100 mdui-tab-full-width" id="tab">
@@ -226,6 +225,17 @@
   }
   .mdui-tab[class*=mdui-color-]:not(.mdui-color-white) .mdui-tab-indicator {
     background-color: #aaa;
+  }
+  .toppng {
+    height: 150px;
+    width: 100%;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: bold;
+    font-size: 30px;
   }
 </style>
 <script>
