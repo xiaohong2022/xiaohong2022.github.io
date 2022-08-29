@@ -16,8 +16,8 @@
   <div class="mdui-appbar mdui-appbar-fixed appbar">
     <div class="mdui-toolbar mdui-color-grey-100">
       <a href="javascript:void(0)" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#drawer'}"><i class="mdui-icon material-icons">menu</i></a>
-      <a href="javascript:void(0)" class="mdui-typo-title">小宏XeLa - 个人主页</a>
-      <div class="title" id="mduititle">首页</div>
+      <a href="javascript:void(0)" class="mdui-typo-title">小宏XeLa</a>
+      <div class="title" id="mduititle">个人主页</div>
       <div class="mdui-toolbar-spacer"></div>
       <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '搜索', position: 'bottom'}">
         <i class="mdui-icon material-icons">search</i>
@@ -45,10 +45,6 @@
   </div>
   <img class="mdui-img-fluid" src="https://cdn-community.codemao.cn/community_frontend/asset/banner_65b4a.png"></img>
   <div class="mdui-divider-inset"></div>
-  <!--div class="mdui-chip">
-    <img class="mdui-chip-icon" src="https://static.box3.codemao.cn/img/QmWnZwK48wxQzP9bSCggCY3DGcMSsnrLAxSuEjd1KRbF6T_60_60_cover.avif"/>
-    <span class="mdui-chip-title">状态：编程中···</span>
-  </div-->
   <div class="mdui-container" id="main-tab-my">
     <div class="mdui-tab mdui-color-grey-100 mdui-tab-full-width" id="tab">
       <a href="#tab1-content" id="tab1" class="mdui-ripple">我的作品</a>
@@ -91,7 +87,7 @@
       window.k4tococofunc = async function (btn){
         var inputnum = document.querySelector("#k4tococoworkurl").value
         if(isNaN(Number(inputnum))){mdui.alert("ID是一个数字，不是字串符哦~","提示");return}
-        if(String(inputnum).length<7){mdui.alert("作品太老了，不能转换！","提示")}
+        if(String(inputnum).length<7){mdui.alert("作品太老了，不能转换！","提示");return}
         btn.innerHTML="转换中..."
         btn.disabled=true
         var xhr = new XMLHttpRequest();
@@ -101,7 +97,7 @@
             var xhr2 = new XMLHttpRequest();
             xhr2.open("GET", "https://api.codemao.cn/creation-tools/v1/works/"+inputnum, true);
             xhr2.onreadystatechange=async()=>{
-              if(xhr2.status==200 && xhr2.readyState==4){
+              if(xhr2.readyState==4){
                 var data = xhr.response
                 var data2 = JSON.parse(xhr2.response)
                 if(data2.error_code){
@@ -109,6 +105,7 @@
                   btn.disabled=false
                   btn.innerHTML="一键转换"
                 }else{
+                  if(xhr2.status!=200)return
                   var workname = data2.work_name
                   var workurl = data2.player_url
                   var downtext = String(eval("`"+data+"`"))
@@ -158,20 +155,12 @@
           <i class="mdui-list-item-icon mdui-icon material-icons">home</i>
           <div class="mdui-list-item-content">首页</div>
       </a>
-      <div class="mdui-collapse-item mdui-collapse-item-open">
-          <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-            <i class="mdui-list-item-icon mdui-icon material-icons">widgets</i>
-            <div class="mdui-list-item-content">小工具</div>
-            <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
-          </div>
-          <div class="mdui-collapse-item-body mdui-list" style="height: auto;">
-            <a href="?tooltag=1" class="mdui-list-item mdui-ripple" id="tooltagbtn1">K4转CoCo</a>
-          </div>
-        </div>
       <a class="mdui-list-item mdui-ripple" href="javascript:void(0)">
           <i class="mdui-list-item-icon mdui-icon material-icons">link</i>
           <div id="friendUrls" class="mdui-list-item-content">友情链接</div>
       </a>
+      <li class="mdui-subheader">小工具</li>
+      <a href="?tooltag=1" class="mdui-list-item mdui-ripple" id="tooltagbtn1">K4转CoCo</a>
       <li class="mdui-subheader">社区主页</li>
       <a target="drawer" rel="noopener" href="https://shequ.codemao.cn/user/9232151" class="mdui-list-item mdui-ripple">
           <div class="mdui-list-item-icon">
@@ -253,6 +242,7 @@
         $2("#tooltagbtn"+getParameters("tooltag"))[0].classList.add("mdui-list-item-active")
         $2("#main-tab-my")[0].style.display="none"
         $2("#mduititle")[0].innerHTML=$2("#tooltagbtn"+getParameters("tooltag"))[0].innerText
+        document.title="小宏工具集 - "+$2("#tooltagbtn"+getParameters("tooltag"))[0].innerText
       }
     } catch (e) {
         $2("#zuocelanhomebtn")[0].classList.add("mdui-list-item-active")
