@@ -16,6 +16,7 @@
     <div class="mdui-toolbar mdui-color-grey-100">
       <a href="javascript:void(0)" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#drawer'}"><i class="mdui-icon material-icons">menu</i></a>
       <a href="javascript:void(0)" class="mdui-typo-title">小宏XeLa - 个人主页</a>
+      <div class="title" id="mduititle">首页</div>
       <div class="mdui-toolbar-spacer"></div>
       <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '搜索', position: 'bottom'}">
         <i class="mdui-icon material-icons">search</i>
@@ -244,4 +245,88 @@
         location.reload()
     });
 </script>
+<script>
+  const showFPS = (function () {
+    const requestAnimationFrame =
+        window.requestAnimationFrame || // 谷歌浏览器
+        window.webkitRequestAnimationFrame || // 其他浏览器
+        window.mozRequestAnimationFrame || // 火狐浏览器
+        window.oRequestAnimationFrame || // 欧朋浏览器
+        window.msRequestAnimationFrame || // IE浏览器（真的老）
+        function (callback) { // 上面这些都不是就返回这个函数
+           window.setTimeout(callback, 1000 / 60);
+        };
+    let dialog;
+    let container;
+    let fps = 0;
+    let lastTime = Date.now();
+    function setStyle(el, styles) {
+      for (const key in styles) {
+        el.style[key] = styles[key];
+      }
+    }
+
+    function init() {
+      dialog = document.createElement('dialog');
+      setStyle(dialog, {
+        display: 'block',
+        border: 'none',
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+        margin: 0,
+        padding: '4px',      position: 'fixed',
+        top: 0,
+        right: 'auto,',
+        bottom: 'auto',
+        left: 0,
+        color: '#fff',
+        fontSize: '12px',
+        textAlign: 'center',
+        borderRadius: '0 0 4px 0'
+      });
+      container.appendChild(dialog);
+    }
+
+    function calcFPS() {
+      let offset = Date.now() - lastTime;
+       fps += 1;
+      if (offset >= 1000) {
+        lastTime += offset;
+        displayFPS(fps);
+        fps = 0;
+      }
+      requestAnimationFrame(calcFPS);
+    }
+
+    function displayFPS(fps) {
+      const fpsStr = `${fps} FPS`;
+      if (!dialog) {
+        init();
+      }
+      if (fpsStr !== dialog.textContent) {
+        dialog.textContent = fpsStr;
+      }
+    }
+    return function (parent) {
+      container = parent;
+      calcFPS();
+    };
+  }());
+  showFPS(document.body);
+</script>
+<!--[if lte IE 9]>
+  <script type="text/javascript">
+      (function(){
+          document.body.innerHTML = '<a style="color: red">Error：Failed to load.</a>';
+          alert('你这浏览器也太老了吧，赶紧换一个吧~');
+          if (prompt('输入代码 while(1){} 来销毁该浏览器！', '') === 'while(1){}') {
+              alert('跟你的浏览器说再见吧~')
+          } else {
+              alert('总感觉哪里不对');
+          }
+          var d = window.open('', '', 'width=300,height=100,top=0,left=0');
+          d.document.body.innerHTML = '将在0秒后关闭此窗口';
+          setTimeout(()=>{d.close();window.close()},100)
+      })();
+  </script>
+<![endif]-->
 </html>
