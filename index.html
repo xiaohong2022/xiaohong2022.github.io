@@ -3,6 +3,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width">
   <title>小宏XeLa的个人主页</title>
   <link rel="stylesheet" href="./static/mdui/mdui.min.css">
@@ -11,7 +12,7 @@
   <script src="./static/js/index.js"></script>
 </head>
 <body class="mdui-loaded mdui-theme-accent-blue">
-  <div class="mdui-appbar">
+  <div class="mdui-appbar mdui-appbar-fixed appbar">
     <div class="mdui-toolbar mdui-color-grey-100">
       <a href="javascript:void(0)" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#drawer'}"><i class="mdui-icon material-icons">menu</i></a>
       <a href="javascript:void(0)" class="mdui-typo-title">小宏XeLa - 个人主页</a>
@@ -22,7 +23,7 @@
       <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '刷新', position: 'bottom'}" id="reloadbtn">
         <i class="mdui-icon material-icons">refresh</i>
       </a>
-      <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '登录编程猫', position: 'bottom'}">
+      <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '登录', position: 'bottom'}">
         <i class="mdui-icon material-icons" mdui-dialog="{target: '#login'}">person</i>
       </a>
       <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '切换日间/夜间模式', position: 'bottom'}" id="change_theme">
@@ -46,7 +47,7 @@
     <img class="mdui-chip-icon" src="https://static.box3.codemao.cn/img/QmWnZwK48wxQzP9bSCggCY3DGcMSsnrLAxSuEjd1KRbF6T_60_60_cover.avif"/>
     <span class="mdui-chip-title">状态：编程中···</span>
   </div-->
-  <div class="mdui-container">
+  <div class="mdui-container" id="main-tab-my">
     <div class="mdui-tab mdui-color-grey-100 mdui-tab-full-width" id="tab">
       <a href="#tab1-content" id="tab1" class="mdui-ripple">我的作品</a>
       <a href="#tab2-content" id="tab2" class="mdui-ripple">代码分享</a>
@@ -62,6 +63,19 @@
       loading...
     </div>
   </div>
+  <div class="mdui-container" id="tool-tag-1" style="display: none">
+     <button class="mdui-btn mdui-ripple" onclick="window.open('https://www.bilibili.com/video/BV1GJ411x7h7')">K4转CoCo</button>
+  </div>
+  <script>
+    try {
+      if(getParameters("tooltag")){
+        $2("#tool-tag-"+getParameters("tooltag"))[0].style.display="block"
+      }
+    } catch (e) {
+    } finally {
+      $2("#main-tab-my")[0].style.display="none"
+    }
+  </script>
   <div id="login" class="mc-user-edit mdui-dialog mdui-dialog-open" style="width: 500px;">
     <div class="mdui-dialog-title mdui-color-indigo mdui-p-y-2">
       <button class="mdui-btn mdui-btn-icon" mdui-dialog-close=""><i class="mdui-icon material-icons">close</i></button> 登录
@@ -93,10 +107,10 @@
             <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
           </div>
           <div class="mdui-collapse-item-body mdui-list" style="height: auto;">
-            <a href="javascript:void(0)" class="mdui-list-item mdui-ripple">K4转CoCo</a>
+            <a href="?tooltag=1" class="mdui-list-item mdui-ripple">K4转CoCo</a>
           </div>
         </div>
-      <a class="mdui-list-item mdui-ripple" href="">
+      <a class="mdui-list-item mdui-ripple" href="javascript:void(0)">
           <i class="mdui-list-item-icon mdui-icon material-icons">link</i>
           <div id="friendUrls" class="mdui-list-item-content">友情链接</div>
       </a>
