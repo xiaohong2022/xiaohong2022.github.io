@@ -82,18 +82,24 @@
   </div>
   <div class="mdui-drawer mdui-drawer-close" id="drawer">
     <ul class="mdui-list">
-      <li class="mdui-list-item mdui-ripple">
+      <a class="mdui-list-item mdui-ripple" href="/">
           <i class="mdui-list-item-icon mdui-icon material-icons">home</i>
           <div class="mdui-list-item-content">首页</div>
-      </li>
-      <li class="mdui-list-item mdui-ripple">
-          <i class="mdui-list-item-icon mdui-icon material-icons">widgets</i>
-          <div id="tools" class="mdui-list-item-content">小工具</div>
-      </li>
-      <li class="mdui-list-item mdui-ripple">
+      </a>
+      <div class="mdui-collapse-item mdui-collapse-item-open">
+          <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons">widgets</i>
+            <div class="mdui-list-item-content">小工具</div>
+            <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+          </div>
+          <div class="mdui-collapse-item-body mdui-list" style="height: auto;">
+            <a href="javascript:void(0)" class="mdui-list-item mdui-ripple">K4转CoCo</a>
+          </div>
+        </div>
+      <a class="mdui-list-item mdui-ripple" href="">
           <i class="mdui-list-item-icon mdui-icon material-icons">link</i>
           <div id="friendUrls" class="mdui-list-item-content">友情链接</div>
-      </li>
+      </a>
       <li class="mdui-subheader">社区主页</li>
       <a target="drawer" rel="noopener" href="https://shequ.codemao.cn/user/9232151" class="mdui-list-item mdui-ripple">
           <div class="mdui-list-item-icon">
