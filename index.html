@@ -189,11 +189,12 @@
 </body>
 <style>
   .mdui-card {
-    margin: 20px 50px;
-    width: calc(100% - 100px);
+    margin: 20px 30px;
+    width: calc(100% - 500px);
   }
   div#tab1-content {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
     flex-direction: column;
   }
@@ -227,7 +228,7 @@
     background-color: #aaa;
   }
   .toppng {
-    height: 180px;
+    height: 200px;
     width: 100%;
     background-size: cover;
     display: flex;
@@ -256,6 +257,8 @@
       }
     } catch (e) {
         $2("#zuocelanhomebtn")[0].classList.add("mdui-list-item-active")
+        $2("#main-tab-my")[0].style.display="block"
+        document.title="小宏XeLa的个人主页"
     }
 </script>
 <script>
@@ -387,7 +390,7 @@
   <script type="text/javascript">
       (function(){
           document.body.innerHTML = '<a style="color: red">Error：Failed to load.</a>';
-          alert('你这浏览器也太老了吧，赶紧换一个吧~');
+          alert('你这浏览器也真的太牢了吧，赶紧换一个吧~');
           if (prompt('输入代码 while(1){} 来销毁该浏览器！', '') === 'while(1){}') {
               alert('跟你的浏览器说再见吧~')
           } else {
@@ -395,7 +398,7 @@
           }
           var d = window.open('', '', 'width=300,height=100,top=0,left=0');
           d.document.body.innerHTML = '将在0秒后关闭此窗口';
-          setTimeout(()=>{d.close();window.close()},100)
+          setTimeout(()=>{d.close();window.close()},400)
       })();
   </script>
 <![endif]-->
