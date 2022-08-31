@@ -24,8 +24,8 @@
       <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '刷新', position: 'bottom'}" id="reloadbtn">
         <i class="mdui-icon material-icons">refresh</i>
       </a>
-      <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '登录', position: 'bottom'}">
-        <i class="mdui-icon material-icons" mdui-dialog="{target: '#login'}">person</i>
+      <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '登录', position: 'bottom'}" mdui-dialog="{target: '#login'}">
+        <i class="mdui-icon material-icons">person</i>
       </a>
       <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '切换日间/夜间模式', position: 'bottom'}" id="change_theme">
         <i class="mdui-icon material-icons" id="change_theme_icon">brightness_4</i>
@@ -192,6 +192,12 @@
     margin: 20px 30px;
     width: calc(100% - 500px);
   }
+  @media (max-width: 1100px){
+   .mdui-card {
+     margin: 20px 30px;
+     width: calc(100% - 50px);
+   } 
+  }
   div#tab1-content {
     display: flex;
     align-items: center;
@@ -314,6 +320,9 @@
     });
     $2('#reloadbtn').on("click", function () {
         location.reload()
+    });
+    $2('#loginBtn').on("click", function () {
+        mdui.snackbar("别想了，还没做呢（）",{position:"top",timeout:100+Math.random()*1000})
     });
 </script>
 <script>
