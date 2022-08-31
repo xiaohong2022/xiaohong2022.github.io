@@ -8,7 +8,7 @@
   <title>小宏XeLa的个人主页</title>
   <link rel="stylesheet" href="./static/mdui/mdui.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="shortcut icon" href="https://static.codemao.cn/whitef/favicon.ico">
+  <link rel="shortcut icon" href="./static/img/avatar.png">
   <script src="./static/mdui/mdui.min.js"></script>
   <script src="./static/js/index.js"></script>
 </head>
@@ -16,16 +16,13 @@
   <div class="mdui-appbar mdui-appbar-fixed appbar">
     <div class="mdui-toolbar mdui-color-grey-100">
       <a href="javascript:void(0)" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#drawer'}"><i class="mdui-icon material-icons">menu</i></a>
-      <a href="javascript:void(0)" class="mdui-typo-title">小宏XeLa</a>
+      <a href="javascript:void(0)" class="mdui-typo-title">小宏XeLa - 个人网站</a>
       <div class="mdui-toolbar-spacer"></div>
       <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '搜索', position: 'bottom'}">
         <i class="mdui-icon material-icons">search</i>
       </a>
-      <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '刷新', position: 'bottom'}" id="reloadbtn">
+      <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '刷新', position: 'bottom'}" >
         <i class="mdui-icon material-icons">refresh</i>
-      </a>
-      <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '登录', position: 'bottom'}" mdui-dialog="{target: '#login'}">
-        <i class="mdui-icon material-icons">person</i>
       </a>
       <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '切换日间/夜间模式', position: 'bottom'}" id="change_theme">
         <i class="mdui-icon material-icons" id="change_theme_icon">brightness_4</i>
@@ -34,7 +31,12 @@
         <i class="mdui-icon material-icons">more_vert</i>
       </a>
       <ul class="mdui-menu" id="main-menu" style="transform-origin: 100% 0px; position: fixed;">
-        <li class="mdui-menu-item" mdui-dialog="{target: '#login'}">
+        <li class="mdui-menu-item">
+          <a href="javascript:void(0);" class="mdui-ripple" mdui-dialog="{target: '#login'}">
+            <i class="mdui-menu-item-icon mdui-icon material-icons">person</i> 登录
+          </a>
+        </li>
+        <li class="mdui-menu-item">
           <a href="javascript:void(0);" class="mdui-ripple">
             <i class="mdui-menu-item-icon mdui-icon material-icons">info_outline</i> 关于
           </a>
@@ -289,6 +291,7 @@
           {name:"编程猫Nemo聊天室",url:"https://shequ.codemao.cn/work/95617409",jianjie:`一个小小的聊天室`,img:"https://creation.codemao.cn/490/YW5kXzIwMDFfOTIzMjE1MV85NTYxNzQwOV8xNjE5OTYwMjU5MTM1X0NreXNLd1NO.jpg"},
           {name:"RGB颜色和十六进制颜色",url:"https://shequ.codemao.cn/work/126191840",jianjie:`一款可以把RGB颜色和十六进制颜色转换的工具`,img:"https://creation.codemao.cn/445/kitten/d2ViXzIwMDFfOTIzMjE1MV8xMjYxOTE4NDBfMTY1OTA1NTAxODkyMV82ZDFkZDVlOQ==.png"},
           {name:"旋转矩阵转四元素",url:"https://shequ.codemao.cn/work/155805102",jianjie:`这是一个可以吧旋转矩阵转换成四元素的小工具`,img:"https://creation.codemao.cn/445/kitten/d2ViXzIwMDFfOTIzMjE1MV8xNTU4MDUxMDJfMTY1OTA1NDk4ODExNV85ZGY0M2M3Yw==.png"},
+          {name:"小宏音乐播放器",url:"https://shequ.codemao.cn/work/156116636",jianjie:`搜音乐、听音乐、下载音乐，就用小宏音乐！`,img:"https://icweiliimg1.pstatp.com/weili/bl/454154420417724920.jpg"},
         ],
       },
       "tab2":{"html":()=>{},"data":[]},
@@ -322,7 +325,7 @@
         location.reload()
     });
     $2('#loginBtn').on("click", function () {
-        mdui.snackbar("别想了，还没做呢（）",{position:"top",timeout:100+Math.random()*1000})
+        mdui.snackbar("别想了，还没做呢（）",{position:"right-top",timeout:100+Math.random()*1000})
     });
 </script>
 <script>
