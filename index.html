@@ -67,7 +67,8 @@
           <label class="mdui-textfield-label">请输入作品ID（必须是发布后的作品）</label>
           <input class="mdui-textfield-input" type="text" id="k4tococoworkurl" value="95617409">
       </div>
-     <button class="mdui-btn mdui-ripple" onclick="k4tococofunc(this)">一键转换</button>
+     <button class="mdui-btn mdui-ripple" onclick="k4tofilefunc(this,0)">转换成CoCo作品</button>
+     <button class="mdui-btn mdui-ripple" onclick="k4tofilefunc(this,1)">转换成HTML网页</button>
     <script>
       function saveData(obj) {
        var ev = document.createEvent("MouseEvents");
@@ -85,14 +86,14 @@
        save_link.download = name;
        saveData(save_link);
       }
-      window.k4tococofunc = async function (btn){
+      window.k4tofilefunc = async function (btn,type){
         var inputnum = document.querySelector("#k4tococoworkurl").value
         if(isNaN(Number(inputnum))){mdui.alert("ID是一个数字，不是字串符哦~","提示");return}
         if(String(inputnum).length<7){mdui.alert("作品太老了，不能转换！","提示");return}
         btn.innerHTML="转换中..."
         btn.disabled=true
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "./static/files/k4tococo.json", true);
+        xhr.open("GET", "./static/files/k4to${type==0:"coco":"html"}.${type==0:"json":"html"}", true);
         xhr.onreadystatechange=()=>{
           if(xhr.status==200 && xhr.readyState==4){
             var xhr2 = new XMLHttpRequest();
@@ -113,7 +114,7 @@
                   await sleep(1000)
                   btn.disabled=false
                   btn.innerHTML="一键转换"
-                  mdui.confirm("转换完成！","提示",()=>{saveFile(`${workname}.json`,downtext)},()=>{},{cancelText:"关闭",confirmText:"下载json",closeOnConfirm:false})
+                  mdui.confirm("转换完成！","提示",()=>{saveFile(`${workname}.json`,downtext)},()=>{},{cancelText:"关闭",confirmText:"下载",closeOnConfirm:false})
                 }
               }
             };
@@ -132,7 +133,7 @@
       }
     </script>
   </div>
-  <div id="login" class="mc-user-edit mdui-dialog mdui-dialog-open" style="width: 500px;">
+  <div id="login" class="mc-user-edit mdui-dialog">
     <div class="mdui-dialog-title mdui-color-indigo mdui-p-y-2">
       <button class="mdui-btn mdui-btn-icon" mdui-dialog-close=""><i class="mdui-icon material-icons">close</i></button> 登录
     </div>
@@ -161,7 +162,7 @@
           <div id="friendUrls" class="mdui-list-item-content">友情链接</div>
       </a>
       <li class="mdui-subheader">小工具</li>
-      <a href="?tooltag=1" class="mdui-list-item mdui-ripple" id="tooltagbtn1">编程猫作品转CoCo</a>
+      <a href="?tooltag=1" class="mdui-list-item mdui-ripple" id="tooltagbtn1">编程猫作品转CoCo/HTML</a>
       <li class="mdui-subheader">社区主页</li>
       <a target="drawer" rel="noopener" href="https://shequ.codemao.cn/user/9232151" class="mdui-list-item mdui-ripple">
           <div class="mdui-list-item-icon">
