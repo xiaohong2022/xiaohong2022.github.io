@@ -88,12 +88,13 @@
       }
       window.k4tofilefunc = async function (btn,type){
         var inputnum = document.querySelector("#k4tococoworkurl").value
+        var btnnametemp = btn.innerHTML
         if(isNaN(Number(inputnum))){mdui.alert("ID是一个数字，不是字串符哦~","提示");return}
         if(String(inputnum).length<7){mdui.alert("作品太老了，不能转换！","提示");return}
         btn.innerHTML="转换中..."
         btn.disabled=true
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "./static/files/k4to${type==0:"coco":"html"}.${type==0:"json":"html"}", true);
+        xhr.open("GET", "./static/files/k4to${type==0?"coco":"html"}.${type==0?"json":"html"}", true);
         xhr.onreadystatechange=()=>{
           if(xhr.status==200 && xhr.readyState==4){
             var xhr2 = new XMLHttpRequest();
@@ -105,7 +106,7 @@
                 if(data2.error_code){
                   mdui.alert(data2.error_message,"提示")
                   btn.disabled=false
-                  btn.innerHTML="一键转换"
+                  btn.innerHTML=btnnametemp
                 }else{
                   if(xhr2.status!=200)return
                   var workname = data2.work_name
@@ -113,7 +114,7 @@
                   var downtext = String(eval("`"+data+"`"))
                   await sleep(1000)
                   btn.disabled=false
-                  btn.innerHTML="一键转换"
+                  btn.innerHTML=btnnametemp
                   mdui.confirm("转换完成！","提示",()=>{saveFile(`${workname}.json`,downtext)},()=>{},{cancelText:"关闭",confirmText:"下载",closeOnConfirm:false})
                 }
               }
