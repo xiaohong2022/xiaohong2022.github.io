@@ -112,10 +112,9 @@
                   var workname = data2.work_name
                   var workurl = data2.player_url
                   var downtext = String(eval("`"+data+"`"))
-                  await sleep(1000)
                   btn.disabled=false
                   btn.innerHTML=btnnametemp
-                  mdui.confirm("转换完成！","提示",()=>{saveFile(`${workname}.json`,downtext)},()=>{},{cancelText:"关闭",confirmText:"下载",closeOnConfirm:false})
+                  mdui.confirm("转换完成！","提示",()=>{saveFile(`${workname}.${type==0?"json":"html"}`,downtext)},()=>{},{cancelText:"关闭",confirmText:"下载",closeOnConfirm:false})
                 }
               }
             };
