@@ -8,7 +8,7 @@
    width: calc(100% - 50px);
  } 
 }
-div#tab1-content {
+div#tab1-content, div#tab2-content, div#tab3-content {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
