@@ -30,7 +30,7 @@
     getParameters:((name)=>{return window.location.search.substring(1).split("&").find((a)=>a.split("=")[0]==name).split("=")[1];}),
     getCookie:((name)=>{return document.cookie.split("; ").find((a)=>a.split("=")[0]==name).split("=")[1];}),
     setCookie:((name, value)=>{document.cookie=`${name}=${value}`; return value}),
-    saveFile:(name, data)=>{var urlObject = window.URL || window.webkitURL || window;var export_blob = new Blob([data]);var save_link = document.createElementNS("http://www.w3.org/1999/xhtml", "a")save_link.href = urlObject.createObjectURL(export_blob);save_link.download = name;save_link.click();}
+    saveFile:(name, data)=>{var urlObject = window.URL || window.webkitURL || window;var export_blob = new Blob([data]);var save_link = document.createElement("a");save_link.href = urlObject.createObjectURL(export_blob);save_link.download = name;save_link.click();}
   };
   Object.assign(window, a);//把上面的东西全部搞到全局变量里
 })();
