@@ -1,0 +1,66 @@
+.mdui-card {
+  margin: 20px 30px;
+  width: calc(100% - 500px);
+}
+@media (max-width: 1100px){
+ .mdui-card {
+   margin: 20px 30px;
+   width: calc(100% - 50px);
+ } 
+}
+div#tab1-content {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.mdui-toolbar[class*=mdui-color-]:not(.mdui-color-transparent) .mdui-btn:hover {
+  background-color: rgba(0,0,0,.1);
+}
+.mdui-theme-layout-dark .mdui-toolbar[class*=mdui-color-]:not(.mdui-color-transparent) .mdui-btn:hover {
+  background-color: rgba(255,255,255,.1);
+}
+.mdui-toolbar[class*=mdui-color-]:not(.mdui-color-transparent) .mdui-btn:active {
+  background-color: rgba(0,0,0,.165);
+}
+.mdui-theme-layout-dark .mdui-toolbar[class*=mdui-color-]:not(.mdui-color-transparent) .mdui-btn:active {
+  background-color: rgba(255,255,255,.165);
+}
+.mdui-container {
+  width: 100%;
+}
+.mdui-theme-layout-dark .mdui-tab a {
+  background-color: #424242;
+  color: #fff!important;
+  opacity: 1!important;
+}
+.mdui-textfield-input {
+  cursor: text!important;
+}
+.mdui-theme-layout-dark .mdui-tab[class*=mdui-color-]:not(.mdui-color-white) .mdui-tab-indicator {
+  background-color: #eee;
+}
+.mdui-tab[class*=mdui-color-]:not(.mdui-color-white) .mdui-tab-indicator {
+  background-color: #aaa;
+}
+.toppng {
+  height: 200px;
+  width: 100%;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 30px;
+}
+@media (max-width: 800px){
+ .toppng {
+   font-size: 16px;
+ }
+}
+@media (max-width: 400px){
+ .toppng {
+   font-size: 12px;
+ }
+}
