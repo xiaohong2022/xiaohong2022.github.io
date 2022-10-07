@@ -115,11 +115,17 @@
   <div class="mdui-container" id="tool-tag-2" style="display: none">
       <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-not-empty">
           <label class="mdui-textfield-label">请输入套娃的层数</label>
-          <input class="mdui-textfield-input" type="text" id="" value="100">
+          <input class="mdui-textfield-input" type="text" id="waddletaowablocklunum" value="100">
       </div>
-     <button class="mdui-btn mdui-ripple" onclick="mdui.alert(`未开发`)">生成并下载文件</button>
+     <button class="mdui-btn mdui-ripple" onclick="waddletaowablocklufunc()">生成并下载文件</button>
     <script>
-      
+      function 生成waddle套娃积木(个数){let texttttt = `<root><head><waddleversion>0</waddleversion><dataversion>0</dataversion><title></title></head><body><blocks><xml xmlns="https://developers.google.com/blockly/xml"><block type="procedures_defreturn" id="s/zB:o(YzF/1Lx;*k|Wp" x="-51" y="61"><mutation statements="false"></mutation><field name="NAME">套娃套娃</field><value name="RETURN">`;texttttt +=new Array(个数).fill("1").map(()=>{return `<block type="math_arithmetic" id="1145141919810"><field name="OP">ADD</field><value name="A"><block type="math_number" id="1145141919810"><field name="NUM">${Math.random()}</field></block></value><value name="B">`}).join("");texttttt +=new Array(个数).fill(`</value>`).join("");texttttt +=`</value></block></value></block></xml></blocks><js>function 套娃套娃() { return `;texttttt+=new Array(个数).fill(`114514+`).join("");texttttt+="44348</js></body></root>";return texttttt};
+      window.waddletaowablocklufunc = async function (){
+        var inputnum = document.querySelector("#waddletaowablocklunum").value
+        if(isNaN(Number(inputnum))){mdui.alert("ID是一个数字，不是字串符哦~","提示");return}
+        saveFile("Waddle积木套娃.waddle",生成waddle套娃积木(Number(inputnum)))
+        mdui.alert(`生成完毕！开始下载<br>Waddle链接：<a href="https://waddle.coco-central.cn/">https://waddle.coco-central.cn/</a>`)
+      }
     </script>
   </div>
   <div id="login" class="mc-user-edit mdui-dialog">
@@ -281,7 +287,6 @@
         el.style[key] = styles[key];
       }
     }
-
     function init() {
       dialog = document.createElement('dialog');
       setStyle(dialog, {
@@ -303,7 +308,6 @@
       });
       container.appendChild(dialog);
     }
-
     function calcFPS() {
       let offset = Date.now() - lastTime;
        fps += 1;
@@ -314,7 +318,6 @@
       }
       requestAnimationFrame(calcFPS);
     }
-
     function displayFPS(fps) {
       const fpsStr = `${fps} FPS`;
       if (!dialog) {
@@ -332,3 +335,5 @@
   showFPS(document.body);
 </script>
 </html>
+
+ 
