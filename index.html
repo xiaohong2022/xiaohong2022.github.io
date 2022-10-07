@@ -6,10 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width">
   <title>小宏XeLa的个人主页</title>
+  <link rel="shortcut icon" href="./static/img/avatar.png">
   <link rel="stylesheet" href="./mdui-v1.0.2/css/mdui.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="stylesheet" href="./static/css/prettify.css">
-  <link rel="shortcut icon" href="./static/img/avatar.png">
   <script src="./mdui-v1.0.2/js/mdui.min.js"></script>
   <script src="./static/js/index.js"></script>
 </head>
@@ -53,15 +53,9 @@
       <a href="#tab2-content" id="tab2" class="mdui-ripple">代码分享</a>
       <a href="#tab3-content" id="tab3" class="mdui-ripple">近期新作</a>
     </div>
-    <div id="tab1-content">
-      loading...
-    </div>
-    <div id="tab2-content" >
-      loading...
-    </div>
-    <div id="tab3-content">
-      loading...
-    </div>
+    <div id="tab1-content">loading...</div>
+    <div id="tab2-content" >loading...</div>
+    <div id="tab3-content">loading...</div>
   </div>
   <div class="mdui-container" id="tool-tag-1" style="display: none">
       <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-not-empty">
@@ -342,20 +336,4 @@
   }());
   showFPS(document.body);
 </script>
-<!--[if lte IE 9]>
-  <script type="text/javascript">
-      (function(){
-          document.body.innerHTML = '<a style="color: red">Error：Failed to load.</a>';
-          alert('你这浏览器也真的太牢了吧，赶紧换一个吧~');
-          if (prompt('输入代码 while(1){} 来销毁该浏览器！', '') === 'while(1){}') {
-              alert('跟你的浏览器说再见吧~')
-          } else {
-              alert('总感觉哪里不对');
-          }
-          var d = window.open('', '', 'width=300,height=100,top=0,left=0');
-          d.document.body.innerHTML = '将在0秒后关闭此窗口';
-          setTimeout(()=>{d.close();window.close()},400)
-      })();
-  </script>
-<![endif]-->
 </html>
