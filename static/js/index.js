@@ -1,4 +1,4 @@
-/*
+/**
  * xiaohong2022.github.io index.js
  * Copyright (c) 2022 xiaohong2022 All rights reserved.
  */
