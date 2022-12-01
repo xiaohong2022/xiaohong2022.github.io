@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width">
+  <title>小宏XeLa的个人主页</title>
+  <link rel="shortcut icon" href="./static/img/avatar.png">
+  <link rel="stylesheet" href="./mdui-v1.0.2/css/mdui.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/prettify.css">
+  <script src="./mdui-v1.0.2/js/mdui.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body class="mdui-loaded mdui-appbar-with-toolbar mdui-theme-accent-blue">
+  <div class="mdui-appbar mdui-appbar-fixed appbar">
+    <div class="mdui-toolbar mdui-color-grey-100">
+      <a href="javascript:void(0)" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#drawer'}"><i class="mdui-icon material-icons">menu</i></a>
+      <a href="javascript:void(0)" class="mdui-typo-title">小宏XeLa - 个人网站</a>
+      <div class="mdui-toolbar-spacer"></div>
+      <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '搜索', position: 'bottom'}">
+        <i class="mdui-icon material-icons">search</i>
+      </a>
+      <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '刷新', position: 'bottom'}" >
+        <i class="mdui-icon material-icons">refresh</i>
+      </a>
+      <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '切换日间/夜间模式', position: 'bottom'}" id="change_theme">
+        <i class="mdui-icon material-icons" id="change_theme_icon">brightness_4</i>
+      </a>
+      <a href="javascript:void(0);" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '更多', position: 'bottom'}" mdui-menu="{target: '#main-menu'}">
+        <i class="mdui-icon material-icons">more_vert</i>
+      </a>
+      <ul class="mdui-menu" id="main-menu" style="transform-origin: 100% 0px; position: fixed;">
+        <li class="mdui-menu-item">
+          <a href="javascript:void(0);" class="mdui-ripple" mdui-dialog="{target: '#login'}">
+            <i class="mdui-menu-item-icon mdui-icon material-icons">person</i> 登录
+          </a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="javascript:void(0);" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon material-icons">info_outline</i> 关于
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div style="background-image: url(./static/img/top_picture.png);" class="toppng" id="mduititle">欢迎来到小宏XeLa的个人主页~</div>
+  <div class="mdui-divider-inset"></div>
+  <div class="mdui-container" id="main-tab-my">
+    <div class="mdui-tab mdui-color-grey-100 mdui-tab-full-width" id="tab">
+      <a href="#tab1-content" id="tab1" class="mdui-ripple">我的作品</a>
+      <a href="#tab2-content" id="tab2" class="mdui-ripple">代码分享</a>
+      <a href="#tab3-content" id="tab3" class="mdui-ripple">近期新作</a>
+    </div>
+    <div id="tab1-content">loading...</div>
+    <div id="tab2-content" >loading...</div>
+    <div id="tab3-content">loading...</div>
+  </div>
+  <div class="mdui-container" id="tool-tag-1" style="display: none">
+      <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-not-empty">
+          <label class="mdui-textfield-label">请输入作品ID（必须是发布后的作品）</label>
+          <input class="mdui-textfield-input" type="text" id="k4tococoworkurl" value="95617409">
+      </div>
+     <button class="mdui-btn mdui-ripple" onclick="k4tofilefunc(this,0)">转换成CoCo作品</button>
+     <button class="mdui-btn mdui-ripple" onclick="k4tofilefunc(this,1)">转换成HTML网页</button>
+    <script>
+      window.k4tofilefunc = async function (btn,type){
+        var inputnum = document.querySelector("#k4tococoworkurl").value
+        var btnnametemp = btn.innerHTML
+        if(isNaN(Number(inputnum))){mdui.alert("ID是一个数字，不是字串符哦~","提示");return}
+        if(String(inputnum).length<7){mdui.alert("作品太老了，不能转换！","提示");return}
+        btn.innerHTML="转换中..."
+        btn.disabled=true
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", `./static/files/k4to${type==0?"coco":"html"}.${type==0?"json":"html"}`, true);
+        xhr.onreadystatechange=()=>{
+          if(xhr.status==200 && xhr.readyState==4){
+            var xhr2 = new XMLHttpRequest();
+            xhr2.open("GET", "https://api.codemao.cn/creation-tools/v1/works/"+inputnum, true);
+            xhr2.onreadystatechange=async()=>{
+              if(xhr2.readyState==4){
+                var data = xhr.response
+                var data2 = JSON.parse(xhr2.response)
+                if(data2.error_code){
+                  mdui.alert(data2.error_message,"提示")
+                  btn.disabled=false
+                  btn.innerHTML=btnnametemp
+                }else{
+                  if(xhr2.status!=200)return
+                  var workname = data2.work_name
+                  var workurl = data2.player_url
+                  var downtext = String(eval("`"+data+"`"))
+                  btn.disabled=false
+                  btn.innerHTML=btnnametemp
+                  mdui.confirm("转换完成！","提示",()=>{saveFile(`${workname}.${type==0?"json":"html"}`,downtext)},()=>{},{cancelText:"关闭",confirmText:"下载",closeOnConfirm:false})
+                }
+              }
+            };
+            xhr2.onerror=()=>{
+              btn.disabled=false
+              btn.innerHTML="转换失败，点击重试"
+            }
+            xhr2.send();
+          }
+        };
+        xhr.onerror=()=>{
+          btn.disabled=false
+          btn.innerHTML="转换失败，点击重试"
+        }
+        xhr.send();
+      }
+    </script>
+  </div>
+  <div class="mdui-container" id="tool-tag-2" style="display: none">
+      <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-not-empty">
+          <label class="mdui-textfield-label">请输入套娃的层数</label>
+          <input class="mdui-textfield-input" type="text" id="waddletaowablocklunum" value="100">
+      </div>
+     <button class="mdui-btn mdui-ripple" onclick="waddletaowablocklufunc()">生成并下载文件</button>
+    <script>
+      function 生成waddle套娃积木(个数){let texttttt = `<root><head><waddleversion>0</waddleversion><dataversion>0</dataversion><title></title></head><body><blocks><xml xmlns="https://developers.google.com/blockly/xml"><block type="procedures_defreturn" id="s/zB:o(YzF/1Lx;*k|Wp" x="-51" y="61"><mutation statements="false"></mutation><field name="NAME">套娃套娃</field><value name="RETURN">`;texttttt +=new Array(个数).fill("1").map(()=>{return `<block type="math_arithmetic" id="1145141919810"><field name="OP">ADD</field><value name="A"><block type="math_number" id="1145141919810"><field name="NUM">${Math.random()}</field></block></value><value name="B">`}).join("");texttttt +=new Array(个数).fill(`</value>`).join("");texttttt +=`</value></block></value></block></xml></blocks><js>function 套娃套娃() { return `;texttttt+=new Array(个数).fill(`114514+`).join("");texttttt+="44348</js></body></root>";return texttttt};
+      window.waddletaowablocklufunc = async function (){
+        var inputnum = document.querySelector("#waddletaowablocklunum").value
+        if(isNaN(Number(inputnum))){mdui.alert("层数是一个数字，不是字串符哦~","提示");return}
+        saveFile("Waddle积木套娃.waddle",生成waddle套娃积木(Number(inputnum)))
+        mdui.alert(`生成完毕！开始下载<br>Waddle链接：<a href="https://waddle.coco-central.cn/">https://waddle.coco-central.cn/</a>`)
+      }
+    </script>
+  </div>
+  <div id="login" class="mdui-dialog">
+    <div class="mdui-dialog-title mdui-color-indigo mdui-p-y-2">
+      <button class="mdui-btn mdui-btn-icon" mdui-dialog-close title="关闭"><i class="mdui-icon material-icons">close</i></button> 登录
+    </div>
+    <div class="mdui-dialog-content mdui-p-a-2">
+      <div class="mdui-textfield mdui-textfield-floating-label">
+          <label class="mdui-textfield-label">用户名</label>
+          <input class="mdui-textfield-input" type="text" id="username">
+      </div>
+      <div class="mdui-textfield mdui-textfield-floating-label">
+          <label class="mdui-textfield-label">密码</label>
+          <input class="mdui-textfield-input" type="password" id="password">
+      </div>
+      <br>
+      <button class="mdui-btn mdui-color-theme-accent mdui-btn-raised mdui-ripple mdui-float-right" id="loginBtn">登录</button>
+      <!--iframe src="https://shequ.codemao.cn/mobile/login" style="width: 100%;height: 720px;border: 0;"></iframe-->
+    </div>
+  </div>
+  <div class="mdui-drawer mdui-drawer-close" id="drawer">
+    <ul class="mdui-list">
+      <a class="mdui-list-item mdui-ripple" href="/" id="zuocelanhomebtn">
+          <i class="mdui-list-item-icon mdui-icon material-icons">home</i>
+          <div class="mdui-list-item-content">首页</div>
+      </a>
+      <a class="mdui-list-item mdui-ripple" href="javascript:void(0)">
+          <i class="mdui-list-item-icon mdui-icon material-icons">link</i>
+          <div id="friendUrls" class="mdui-list-item-content">友情链接</div>
+      </a>
+      <li class="mdui-subheader">小工具</li>
+      <a href="?tooltag=1" class="mdui-list-item mdui-ripple" id="tooltagbtn1">编程猫作品转CoCo/HTML</a>
+      <a href="?tooltag=2" class="mdui-list-item mdui-ripple" id="tooltagbtn2">Waddle套娃积木生成</a>
+      <li class="mdui-subheader">社区主页</li>
+      <a target="drawer" rel="noopener" href="https://shequ.codemao.cn/user/9232151" class="mdui-list-item mdui-ripple">
+          <div class="mdui-list-item-icon">
+            <img style="width:24px;height:24px" src="https://static.codemao.cn/whitef/favicon.ico"></img>
+          </div>
+          <div class="mdui-list-item-content">编程猫</div>
+          </a>
+      </a>
+      <a target="drawer" rel="noopener" href="https://box3.codemao.cn/u/codemao2020" class="mdui-list-item mdui-ripple">
+          <div class="mdui-list-item-icon">
+            <img style="width:24px;height:24px" src="https://box3.codemao.cn/favicon.ico"></img>
+          </div>
+          <div class="mdui-list-item-content">Box3</div>
+          </a>
+      </a>
+      <a target="drawer" rel="noopener" href="https://github.com/xiaohong2022" class="mdui-list-item mdui-ripple">
+          <div class="mdui-list-item-icon">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 36 36" enable-background="new 0 0 36 36" xml:space="preserve" class="mdui-icon" style="width: 24px;height:24px;">
+              <path fill-rule="evenodd" clip-rule="evenodd" fill="#000" d="M18,1.4C9,1.4,1.7,8.7,1.7,17.7c0,7.2,4.7,13.3,11.1,15.5c0.8,0.1,1.1-0.4,1.1-0.8c0-0.4,0-1.4,0-2.8c-4.5,1-5.5-2.2-5.5-2.2c-0.7-1.9-1.8-2.4-1.8-2.4c-1.5-1,0.1-1,0.1-1c1.6,0.1,2.5,1.7,2.5,1.7c1.5,2.5,3.8,1.8,4.7,1.4c0.1-1.1,0.6-1.8,1-2.2c-3.6-0.4-7.4-1.8-7.4-8.1c0-1.8,0.6-3.2,1.7-4.4c-0.2-0.4-0.7-2.1,0.2-4.3c0,0,1.4-0.4,4.5,1.7c1.3-0.4,2.7-0.5,4.1-0.5c1.4,0,2.8,0.2,4.1,0.5c3.1-2.1,4.5-1.7,4.5-1.7c0.9,2.2,0.3,3.9,0.2,4.3c1,1.1,1.7,2.6,1.7,4.4c0,6.3-3.8,7.6-7.4,8c0.6,0.5,1.1,1.5,1.1,3c0,2.2,0,3.9,0,4.5c0,0.4,0.3,0.9,1.1,0.8c6.5-2.2,11.1-8.3,11.1-15.5C34.3,8.7,27,1.4,18,1.4z"></path>
+            </svg>
+          </div>
+          <div class="mdui-list-item-content">GitHub</div>
+          </a>
+      </a>
+    </ul>
+  </div>
+</body>
+<script>
+    var $2 = mdui.$;
+    var tab = new mdui.Tab('#tab');
+    tab.show(0);
+    var inst = new mdui.Drawer('#drawer');
+    inst.close();
+</script>
+<script>
+    try {
+      if(getParameters("tooltag")){
+        $2("#tool-tag-"+getParameters("tooltag"))[0].style.display="block"
+        $2("#tooltagbtn"+getParameters("tooltag"))[0].classList.add("mdui-list-item-active")
+        $2("#main-tab-my")[0].style.display="none"
+        $2("#mduititle")[0].innerHTML=$2("#tooltagbtn"+getParameters("tooltag"))[0].innerText
+        document.title="小宏工具集 - "+$2("#tooltagbtn"+getParameters("tooltag"))[0].innerText
+      }
+    } catch (e) {
+        $2("#zuocelanhomebtn")[0].classList.add("mdui-list-item-active")
+        $2("#main-tab-my")[0].style.display="block"
+        document.title="小宏XeLa的个人主页"
+    }
+</script>
+<script>
+    const hdata = {
+      "tab1":{
+        "html":(data)=>{return `<div class="mdui-card mdui-hoverable"><div class="mdui-card-media">
+        <img src="${data.img}"/>
+        <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
+          <div class="mdui-card-primary">
+            <div class="mdui-card-primary-title">${data.name}</div>
+            <div class="mdui-card-primary-subtitle">${data.jianjie}</div>
+          </div>
+        </div>
+      </div>
+      <div class="mdui-card-actions">
+        <button class="mdui-btn mdui-ripple" onclick="window.open('${data.url}')">查看作品</button>
+      </div></div>
+      `},
+        "data":[
+          {name:"水上跑酷（已停更）",url:"https://box3.codemao.cn/g/225566",jianjie:`一个水上跑酷地图（已停更）`,img:"./static/img/mywork_image_01.png"},
+          {name:"创作世界（Build World）",url:"https://box3.codemao.cn/g/397936",jianjie:`这个地图完全空白，尽情发挥想象力，创造全新的世界。`,img:"./static/img/mywork_image_02.png"},
+          {name:"编程猫Nemo聊天室",url:"https://shequ.codemao.cn/work/95617409",jianjie:`一个小小的聊天室`,img:"./static/img/mywork_image_03.jpg"},
+          {name:"RGB颜色和十六进制颜色",url:"https://shequ.codemao.cn/work/126191840",jianjie:`一款可以把RGB颜色和十六进制颜色转换的工具`,img:"./static/img/mywork_image_04.png"},
+          {name:"旋转矩阵转四元素",url:"https://shequ.codemao.cn/work/155805102",jianjie:`这是一个可以吧旋转矩阵转换成四元素的小工具`,img:"./static/img/mywork_image_05.png"},
+          {name:"小宏音乐播放器",url:"https://shequ.codemao.cn/work/156116636",jianjie:`搜音乐、听音乐、下载音乐，就用小宏音乐！`,img:"./static/img/mywork_image_06.jpg"},
+        ],
+      },
+      "tab2":{"html":()=>{},"data":[]},
+      "tab3":{"html":()=>{},"data":[]},
+    }
+    ;(async ()=>{
+      for(var a in hdata){
+        var b = $2("#"+a+"-content")[0];
+        var c = "";
+        var d = hdata[a]
+        if(!d["data"].length){
+          c="这里啥也没有a"
+        }else{
+          for(var e of d["data"]){
+            c+=d["html"](e)
+          }
+        }
+        b.innerHTML=c;
+      }
+    })();
+    $2('#change_theme').on("click", function () {
+        if($2('body')[0].className.split(" ").includes("mdui-theme-layout-dark")){
+          $2('body')[0].classList.remove("mdui-theme-layout-dark")
+          $2("#change_theme_icon")[0].innerHTML="brightness_4"
+        }else{
+          $2('body')[0].classList.add("mdui-theme-layout-dark")
+          $2("#change_theme_icon")[0].innerHTML="brightness_7"
+        }
+    });
+    $2('#reloadbtn').on("click", function () {
+        location.reload()
+    });
+    $2('#loginBtn').on("click", function () {
+        mdui.snackbar("别想了，还没做呢（）",{position:"right-top",timeout:100+Math.random()*1000})
+    });
+</script>
+<script>
+  const showFPS = (function () {
+    const requestAnimationFrame =
+        window.requestAnimationFrame || // 谷歌浏览器
+        window.webkitRequestAnimationFrame || // 其他浏览器
+        window.mozRequestAnimationFrame || // 火狐浏览器
+        window.oRequestAnimationFrame || // 欧朋浏览器
+        window.msRequestAnimationFrame || // IE浏览器（真的老）
+        function (callback) { // 上面这些都不是就返回这个函数
+           window.setTimeout(callback, 1000 / 60);
+        };
+    let dialog;
+    let container;
+    let fps = 0;
+    let lastTime = Date.now();
+    function setStyle(el, styles) {
+      for (const key in styles) {
+        el.style[key] = styles[key];
+      }
+    }
+    function init() {
+      dialog = document.createElement('dialog');
+      setStyle(dialog, {
+        display: 'block',
+        border: 'none',
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+        margin: 0,
+        padding: '4px', 
+        position: 'fixed',
+        top: 0,
+        right: 'auto,',
+        bottom: 'auto',
+        left: 0,
+        color: '#fff',
+        fontSize: '12px',
+        textAlign: 'center',
+        borderRadius: '0 0 4px 0',
+        zIndex: "9999999999999999999999999999999999999999999999",
+      });
+      container.appendChild(dialog);
+    }
+    function calcFPS() {
+      let offset = Date.now() - lastTime;
+       fps += 1;
+      if (offset >= 1000) {
+        lastTime += offset;
+        displayFPS(fps);
+        fps = 0;
+      }
+      requestAnimationFrame(calcFPS);
+    }
+    function displayFPS(fps) {
+      const fpsStr = `${fps} FPS`;
+      if (!dialog) {
+        init();
+      }
+      if (fpsStr !== dialog.textContent) {
+        dialog.textContent = fpsStr;
+      }
+    }
+    return function (parent) {
+      container = parent;
+      calcFPS();
+    };
+  }());
+  showFPS(document.body);
+</script>
+</html>
