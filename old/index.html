@@ -72,7 +72,7 @@
         btn.innerHTML="转换中..."
         btn.disabled=true
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", `./static/files/k4to${type==0?"coco":"html"}.${type==0?"json":"html"}`, true);
+        xhr.open("GET", `../static/files/k4to${type==0?"coco":"html"}.${type==0?"json":"html"}`, true);
         xhr.onreadystatechange=()=>{
           if(xhr.status==200 && xhr.readyState==4){
             var xhr2 = new XMLHttpRequest();
